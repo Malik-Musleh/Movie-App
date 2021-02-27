@@ -53,15 +53,18 @@ section {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0px -15px;
+
 }
 
 .results .result {
-	width: 33.333%;
-	min-width: 250px;
-	padding: 15px;
-	display: flex;
-	flex-direction: column;
-	cursor: pointer;
+		background-color: rgb(169, 194, 240);
+		border-radius: 3px;
+		box-shadow: 3px 3px 5px;
+		overflow: hidden;
+		position: relative;
+		margin: 1rem;
+		width: 250px;
+		min-width: 300p;	  
 }
 
 .results .result img {
@@ -158,12 +161,13 @@ section {
 
 .movie-over {
 	background-color: white;
-	position: absolute;
+	position:absolute;
 	padding: 5px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	transform: translate(100%);
+
   
 	overflow: hidden;
 	 text-overflow: ellipsis;
@@ -173,7 +177,7 @@ section {
 	 -webkit-box-orient: vertical;
   
   }
-  
-  .movie:hover .movie-over {
-	transform: translate(0%);
+
+  .result:hover .movie-over {
+	transform: translate(0%) ;
   }
