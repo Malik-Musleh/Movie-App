@@ -15,7 +15,17 @@ function App() {
     setSearch(pre => { return { ...pre, s: e.target.value } });
   }
 
-
+  const searchMovie = (e) => {
+    if (e.key === "Enter") {
+      axios(OMDbAPI + "&s=" + movie.s).then(({ data }) => {
+        let results = data.Search;
+        console.log(data);
+        setSearch(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
+    }
+  }
   
 
 
