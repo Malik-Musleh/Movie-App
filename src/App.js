@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Search from './Componants/Search';
+import Results from './Componants/Results';
+import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
       </header>
       <main>
         <Search handleInput={handleInput} searchMovie={searchMovie} />
+        <Results results={movie.results} openPopup={openPopup} />
       </main>
     </div>
   );
