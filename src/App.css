@@ -156,3 +156,24 @@ section {
 	background: #223343;
 }
 
+.movie-over {
+	background-color: white;
+	position: absolute;
+	padding: 5px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translate(100%);
+  
+	overflow: hidden;
+	 text-overflow: ellipsis;
+	
+	 display: -webkit-box;
+	 -webkit-line-clamp: 7; 
+	 -webkit-box-orient: vertical;
+  
+  }
+  
+  .movie:hover .movie-over {
+	transform: translate(0%);
+  }
