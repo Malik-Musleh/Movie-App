@@ -29,7 +29,19 @@ function App() {
     }
   }
   
+  const openPopup = title => {
+    axios(OMDbAPI + "&t=" + title).then(({ data }) => {
+      setSearch(prevState => {
+        return { ...prevState, selected: data }
+      })
+    });
+  }
 
+  const closePopup = () => {
+    setSearch(prevState => {
+      return { ...prevState, selected: {} }
+    })
+  }
 
   return (
     <div className="App">
