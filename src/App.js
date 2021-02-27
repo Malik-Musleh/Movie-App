@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Search from './Componants/Search';
 import Results from './Componants/Results';
+import Popup from './Componants/Popup';
 import axios from 'axios';
 import './App.css';
 
@@ -51,6 +52,7 @@ function App() {
       <main>
         <Search handleInput={handleInput} searchMovie={searchMovie} />
         <Results results={movie.results} openPopup={openPopup} />
+        {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} closePopUp={closePopup} /> : false}
       </main>
     </div>
   );
