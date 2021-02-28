@@ -242,3 +242,34 @@ section {
 	  float: none;
 	}
   }
+
+   button{
+	  background-color: #cedeec;
+	  width: 80px;
+	  max-height: 50px;
+	  position: sticky;
+	  bottom: 20px;
+	  margin: 40px;
+	  border: none;
+	  box-shadow: 3px 2px 3px 2px  black;
+	  border-radius: 3px;
+	  font-size: medium;
+  } 
+  /* button :hover{
+	box-shadow: 0px  black;
+	background-color: blanchedalmond;
+	transform: scale(1.2);
+  }  */
+  button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}

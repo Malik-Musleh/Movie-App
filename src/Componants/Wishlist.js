@@ -11,7 +11,10 @@ function WishList({ results, openPopup }) {
         }
     });
     const rem =object.filter((e,i,a)=>typeof(e.Title)!=="undefined"&&e!==a[i+1])
-    console.log(rem);  
+    let bool =rem[0].Title==""
+    if (bool) rem.length=0
+    console.log(rem);
+        
     // const w = wish.split(",").filter((e, i, a) => a.indexOf(e) > -1 ? a.splice(i, 0) : e)
     const m = rem.map((result,i )=> (<div key={i} className="result" onClick={() => openPopup(result.imdbID)}>
         <img src={result.Poster} ></img>

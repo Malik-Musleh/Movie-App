@@ -22,7 +22,7 @@ function App() {
     s: "",
     results: [],
     selected: {},
-    All: [],
+    allMovie: [],
     page: "1",
     wishList: []
   });
@@ -53,14 +53,15 @@ function App() {
     a.push(e)
     setSearch(pre => { return { ...pre, wishList: a } })
   }
-  // const getAllMovies = () => {
-  //   axios(OMDbAPI + "&s=Batman&page=" + movie.page).then(({ data }) => {
-  //     console.log(data.Search);
-  //     setSearch(prevState => {
-  //       return { ...prevState, All: data.Search }
-  //     })
-  //   });
-  // }
+
+  const getAllMovies = () => {
+    axios(OMDbAPI + "&s=Batman&page=" + movie.page).then(({ data }) => {
+      console.log(data.Search);
+      setSearch(prevState => {
+        return { ...prevState, allMovie: data.Search }
+      })
+    });
+  }
   // getAllMovies()
   const openPopup = id => {
     axios(OMDbAPI + "&i=" + id).then(({ data }) => {
@@ -84,7 +85,10 @@ function App() {
       m.length<1? s=m.concat(" "+element.Title+","+element.Poster+","+element.imdbID): s=m.concat(","+ element.Title+","+element.Poster+","+element.imdbID)
       localStorage.setItem('myData',s);
     }
-    });      
+    });
+    const decPage=()=> {setSearch(prevState =>{return {...prevState, page: (Number(movie.page--)).toString()}});getAllMovies()}
+    const incPage=()=> {setSearch(prevState =>{return {...prevState, page: (Number(movie.page++)).toString()}});getAllMovies()}
+    useEffect(()=>getAllMovies(),[])      
   useEffect(() => set)
   return (
     <Router>
@@ -97,15 +101,15 @@ function App() {
           <main>
           <Search handleInput={handleInput} searchMovie={searchMovie} />
           </main>
-            <Results results={movie.results} openPopup={openPopup} />
+            {movie.results.length>1?<Results results={movie.results} openPopup={openPopup} />:
+            <Home results={movie.allMovie} openPopup={openPopup}  />}
         </Route>
         <Route exact path="/wish-list">
         <Header  wishList={movie.wishList}/>
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
-        {/* <Home results={movie.All} ope nPopup={openPopup}  /> */}
-        {/* <button onClick={() => setSearch(prevState =>{return {...prevState, page: (Number(movie.page++)).toString()}})}>+</button> */}
-        {/* {movie.page===1? (true):<button onClick={() => setSearch(prevState =>{return {...prevState, page: (Number(movie.page--)).toString()}})}>-</button>} */}
+        <button onClick={incPage}>Next Page</button>
+        {movie.page<1? (true):<button onClick={()=>decPage}>Pre Page</button>} 
         {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addToWish={addToWish} closePopUp={closePopup} /> : false}
       </div>
     </Router>

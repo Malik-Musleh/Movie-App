@@ -2,22 +2,13 @@ import React ,{useState}from 'react';
 
 function Popup({ closePopUp, selected,addToWish }) {
     const [wL,setWl]=useState(true)
-    // console.log(selected);
+
     var remVal=selected.Title+","+selected.Poster+","+selected.imdbID
-    const lS=localStorage.getItem("myData")
-    console.log(lS);
+    let lS=localStorage.getItem("myData")
     let accesse =lS.toString().search(remVal)>-1
-    console.log(accesse);
-    // if (accesse) {
-    //     setWl(true)
-    // }else{
-    //     setWl(false)
-    // }
-    // lS.toString().search(remVal)>-1?(setWl(true)):(setWl(false));
-    // console.log(lS.toString().search(remVal));
     const removeFromWish =()=>{
-         lS=lS.replace(remVal,"")
-        localStorage.setItem("myData",lS)
+         let v=lS.replace(remVal,"").replace(/s+/g,"")
+        localStorage.setItem("myData",v)
         setWl(true)
     }
     return (  
@@ -34,7 +25,7 @@ function Popup({ closePopUp, selected,addToWish }) {
             </div>
             <button className="close" onClick={closePopUp}>close</button>
             {wL? <button className="close" onClick={()=>{addToWish(selected);setWl(false)}}>Add To Wish List</button>:
-            <button className="close" onClick={()=>removeFromWish}>Remove From Wish List</button>}
+            <button className="close" onClick={()=>{removeFromWish();}}>Remove From Wish List</button>}
         </section>
     );
 }
