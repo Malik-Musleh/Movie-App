@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Search from './Componants/Search';
 import Results from './Componants/Results';
+import Home from './Componants/Home';
 import Popup from './Componants/Popup';
 import axios from 'axios';
 import './App.css';
@@ -11,9 +12,10 @@ function App() {
     s: "",
     results: [],
     selected: {},
-    overveiw:[]
+    All:[],
+    page:[]
   });
-
+  movie.s.length==0?setSearch((pre => { return { ...pre, results: []} })):setSearch((pre => { return { ...pre, All: []} }))
   const handleInput = (e) => {
     setSearch(pre => { return { ...pre, s: e.target.value } });
   }
@@ -29,7 +31,20 @@ function App() {
       });
     }
   }
+  const changePage=()=>setSearch(prevState => {
+    return { ...prevState, page: (Number(page++)).toString() }
+  })
+  const getAllMovies = (num) => {
+      axios(OMDbAPI+ "&page=" + num).then(({ data }) => {
+        // let All = data.slice(0,15);
+        console.log(data);
+        setSearch(prevState => {
+          return { ...prevState, All: data }
+        })
+      });
+    }
   
+  // getAllMovies();
   const openPopup = title => {
     axios(OMDbAPI + "&t=" + title).then(({ data }) => {
       setSearch(prevState => {
@@ -52,6 +67,7 @@ function App() {
       <main>
         <Search handleInput={handleInput} searchMovie={searchMovie} />
         <Results results={movie.results} openPopup={openPopup} />
+        <Results results={movie.All} openPopup={openPopup} />
         {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} closePopUp={closePopup} /> : false}
       </main>
     </div>
