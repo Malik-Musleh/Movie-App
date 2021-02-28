@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
 import Result from './Result';
 
 function WishList({ results, openPopup }) {
     const wish = localStorage.getItem('myData');
     console.log(wish.split(","));
     const object =wish.split(",").map((e,i,a) => {
-        if (i%2===0) {       
-            return {Title:a[i],Poster:a[i+1]}
+        if (i%3===0) {       
+            return {Title:a[i],Poster:a[i+1],imdbID:a[i+2]}
         }else{
             return ""
         }
@@ -14,7 +13,7 @@ function WishList({ results, openPopup }) {
     const rem =object.filter((e,i,a)=>typeof(e.Title)!=="undefined"&&e!==a[i+1])
     console.log(rem);  
     // const w = wish.split(",").filter((e, i, a) => a.indexOf(e) > -1 ? a.splice(i, 0) : e)
-    const m = rem.map((result,i )=> (<div key={i} className="result" onClick={() => openPopup(result.Title)}>
+    const m = rem.map((result,i )=> (<div key={i} className="result" onClick={() => openPopup(result.imdbID)}>
         <img src={result.Poster} ></img>
         <h3>{result.Title}</h3>
     </div>

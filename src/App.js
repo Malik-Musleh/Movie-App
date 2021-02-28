@@ -61,9 +61,10 @@ function App() {
   //   });
   // }
   // getAllMovies()
-  const openPopup = title => {
-    axios(OMDbAPI + "&t=" + title).then(({ data }) => {
+  const openPopup = id => {
+    axios(OMDbAPI + "&i=" + id).then(({ data }) => {
       setSearch(prevState => {
+        console.log(data);
         return { ...prevState, selected: data }
       })
     });
@@ -76,9 +77,10 @@ function App() {
   }
   const set = () => movie.wishList.length == 0 ? true : movie.wishList.forEach(element => {
     let m = localStorage.getItem('myData');
-    if (!m.includes(element)) {
+    console.log(m);
+    if (m.search(element.Title)==-1) {
       var s;
-      m.length<1? s=m.concat(" "+element.Title+","+element.Poster): s=m.concat(","+ element.Title+","+element.Poster)
+      m.length<1? s=m.concat(" "+element.Title+","+element.Poster+","+element.imdbID): s=m.concat(","+ element.Title+","+element.Poster+","+element.imdbID)
       localStorage.setItem('myData',s);
     }
     });      
