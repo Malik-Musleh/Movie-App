@@ -1,7 +1,25 @@
-import React from 'react';
+import React ,{useState}from 'react';
 
 function Popup({ closePopUp, selected,addToWish }) {
-    console.log(selected);
+    const [wL,setWl]=useState(true)
+    // console.log(selected);
+    var remVal=selected.Title+","+selected.Poster+","+selected.imdbID
+    const lS=localStorage.getItem("myData")
+    console.log(lS);
+    let accesse =lS.toString().search(remVal)>-1
+    console.log(accesse);
+    // if (accesse) {
+    //     setWl(true)
+    // }else{
+    //     setWl(false)
+    // }
+    // lS.toString().search(remVal)>-1?(setWl(true)):(setWl(false));
+    // console.log(lS.toString().search(remVal));
+    const removeFromWish =()=>{
+         lS=lS.replace(remVal,"")
+        localStorage.setItem("myData",lS)
+        setWl(true)
+    }
     return (  
         <section className="popup">
             <div className="content">
@@ -15,7 +33,8 @@ function Popup({ closePopUp, selected,addToWish }) {
                 <p className="rating">Runtime:{selected.Runtime}</p>
             </div>
             <button className="close" onClick={closePopUp}>close</button>
-            <button className="close" onClick={()=>addToWish(selected)}>Add To Wish List</button>
+            {wL? <button className="close" onClick={()=>{addToWish(selected);setWl(false)}}>Add To Wish List</button>:
+            <button className="close" onClick={()=>removeFromWish}>Remove From Wish List</button>}
         </section>
     );
 }

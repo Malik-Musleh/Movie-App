@@ -6,7 +6,9 @@ const Header = ({wishList}) => {
     return (
         <div className="header" >
             <div>
-            <a href="http://localhost:3000/" class="logo">CompanyLogo <img src="https://previews.123rf.com/images/fokaspokas/fokaspokas1812/fokaspokas181200273/114275789-film-roll-old-movie-strip-icon-cinema-logo-white-icon-with-shadow-on-transparent-background.jpg" ></img></a>
+            <a href="http://localhost:3000/" class="logo">
+                 <img src="https://previews.123rf.com/images/fokaspokas/fokaspokas1812/fokaspokas181200273/114275789-film-roll-old-movie-strip-icon-cinema-logo-white-icon-with-shadow-on-transparent-background.jpg" ></img>
+                 CompanyLogo</a>
             </div>
             <a href="http://localhost:3000/" >Home</a>
             <a href="http://localhost:3000/wish-list">Wish List {m}</a>

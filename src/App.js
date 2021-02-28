@@ -96,8 +96,8 @@ function App() {
           </header>
           <main>
           <Search handleInput={handleInput} searchMovie={searchMovie} />
-            <Results results={movie.results} openPopup={openPopup} />
           </main>
+            <Results results={movie.results} openPopup={openPopup} />
         </Route>
         <Route exact path="/wish-list">
         <Header  wishList={movie.wishList}/>
