@@ -25,7 +25,7 @@ function App() {
     page: "1",
     wishList: []
   });
-  localStorage["array"] = ["s", 2, { 3: 3, 4: 4, 5: 4 }];
+  // localStorage["array"] = ["s", 2, { 3: 3, 4: 4, 5: 4 }];
   // localStorage.array[1]="1"
   // localStorage["names"] = new Array();
   // localStorage.names[0] = prompt("New member name?");
@@ -65,7 +65,6 @@ function App() {
     axios(OMDbAPI + "&t=" + title).then(({ data }) => {
       setSearch(prevState => {
         return { ...prevState, selected: data }
-
       })
     });
   }
@@ -77,10 +76,13 @@ function App() {
   }
   const set = () => movie.wishList.length == 0 ? true : movie.wishList.forEach(element => {
     let m = localStorage.getItem('myData');
-    var s;
-    m.length<1? s=m.concat( element.Title): s=m.concat(","+ element.Title)
-    localStorage.setItem('myData',s);
-  });
+    if (!m.includes(element)) {
+      var s;
+      m.length<1? s=m.concat(" "+element.Title+","+element.Poster): s=m.concat(","+ element.Title+","+element.Poster)
+      localStorage.setItem('myData',s);
+    }
+    });      
+    
   useEffect(() => set)
   return (
     <Router>
@@ -95,7 +97,7 @@ function App() {
           </main>
         </Route>
         <Route exact path="/wishlist">
-          {/* <Wishlist results={movie.wishList} openPopup={openPopup} /> */}
+          <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
         {/* <Home results={movie.All} ope nPopup={openPopup}  /> */}
         {/* <button onClick={() => setSearch(prevState =>{return {...prevState, page: (Number(movie.page++)).toString()}})}>+</button> */}
