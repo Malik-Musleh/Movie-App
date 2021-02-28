@@ -1,7 +1,8 @@
 import React from 'react';
 
-function Popup({ closePopUp, selected }) {
-    return (
+function Popup({ closePopUp, selected,addToWish }) {
+    console.log(selected);
+    return (  
         <section className="popup">
             <div className="content">
                 <img src={selected.Poster} ></img>
@@ -14,6 +15,7 @@ function Popup({ closePopUp, selected }) {
                 <p className="rating">Runtime:{selected.Runtime}</p>
             </div>
             <button className="close" onClick={closePopUp}>close</button>
+            <button className="close" onClick={()=>addToWish(selected)}>Add To Wish List</button>
         </section>
     );
 }

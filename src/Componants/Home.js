@@ -1,9 +1,7 @@
 import React,{useState} from 'react';
 import Result from './Result';
 
-function Home({ results ,openPopup}) {
-
-
+function Home({ results ,openPopup}) {    
     return (
         <section className="results">
             {results.map(result => (

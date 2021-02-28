@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 
 function Result({ result, openPopup }) {
@@ -10,7 +10,7 @@ function Result({ result, openPopup }) {
             return setState(data)
         });
       }
-      overveiw()
+      useEffect(()=>overveiw(),[]) 
     //   results.forEach(e => {
     //    setState( overveiw(e.Title))
     //   });
