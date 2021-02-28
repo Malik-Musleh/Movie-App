@@ -18,7 +18,7 @@ function WishList({ results, openPopup }) {
         <h3>{result.Title}</h3>
     </div>
     ));
-    // console.log(w);
+    localStorage.setItem('wishtot',rem.length);      
 
     return (
         <section className="results">

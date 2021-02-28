@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Search from './Componants/Search';
+import Header from './Componants/Header';
 import Results from './Componants/Results';
 import Home from './Componants/Home';
 import Wishlist from './Componants/Wishlist';
@@ -84,21 +85,22 @@ function App() {
       localStorage.setItem('myData',s);
     }
     });      
-    
   useEffect(() => set)
   return (
     <Router>
       <div className="App">
         <Route exact path="/">
+          <Header wishList={movie.wishList} />
           <header className="App-header">
             <h1>Movie App</h1>
           </header>
           <main>
-            <Search handleInput={handleInput} searchMovie={searchMovie} />
+          <Search handleInput={handleInput} searchMovie={searchMovie} />
             <Results results={movie.results} openPopup={openPopup} />
           </main>
         </Route>
-        <Route exact path="/wishlist">
+        <Route exact path="/wish-list">
+        <Header  wishList={movie.wishList}/>
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
         {/* <Home results={movie.All} ope nPopup={openPopup}  /> */}
