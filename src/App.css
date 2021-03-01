@@ -50,10 +50,14 @@ section {
 }
 
 .results {
-	display: flex;
+	display:flex;
 	flex-wrap: wrap;
 	margin: 0px -15px;
-	justify-content: space-around;
+	justify-content: space-around ;
+	/* grid-template-columns: 1fr 1fr 1fr 1fr; */
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .results .result {
@@ -67,6 +71,7 @@ section {
 		min-width: 300p;
 		display: flex;	
 		flex-wrap: wrap;
+
   
 }
 
@@ -141,7 +146,7 @@ section {
 	padding: 15px;
 }
 
-.popup .content .close {
+/* .popup .content .close {
 	display: inline-block;
 	padding: 15px 30px;
 	font-size: 18px;
@@ -160,7 +165,7 @@ section {
 
 .popup .content .close:hover {
 	background: #223343;
-}
+} */
 
 .movie-over {
 	background-color: white;
@@ -243,13 +248,20 @@ section {
 	}
   }
 
+  .button-container{
+	  /* display: flex; */
+	  /* flex-wrap: wrap; */
+	  text-align: center;
+	  /* height:40px; */
+	  /* justify-content: right; */
+  }
    button{
 	  background-color: #cedeec;
 	  width: 80px;
-	  max-height: 50px;
-	  position: sticky;
+	  height: 50px;
+	  position: relative;
 	  bottom: 20px;
-	  margin: 40px;
+	  margin-left: 40px;
 	  border: none;
 	  box-shadow: 3px 2px 3px 2px  black;
 	  border-radius: 3px;
@@ -272,4 +284,10 @@ button:focus {
 
 button:active {
     transform: scale(0.99);
+}
+
+.close{
+position: sticky;
+top: 50px;
+right: 50px;
 }

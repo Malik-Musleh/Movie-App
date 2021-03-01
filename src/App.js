@@ -24,21 +24,17 @@ function App() {
     selected: {},
     allMovie: [],
     page: "1",
+    searchPage: "1",
     wishList: []
   });
-  // localStorage["array"] = ["s", 2, { 3: 3, 4: 4, 5: 4 }];
-  // localStorage.array[1]="1"
-  // localStorage["names"] = new Array();
-  // localStorage.names[0] = prompt("New member name?");
 
-  // movie.s.length == 0 ? setSearch((pre => { return { ...pre, results: [] } })) : setSearch((pre => { return { ...pre, All: [] } }))
   const handleInput = (e) => {
     setSearch(pre => { return { ...pre, s: e.target.value } });
   }
 
   const searchMovie = (e) => {
     if (e.key === "Enter") {
-      axios(OMDbAPI + "&s=" + movie.s).then(({ data }) => {
+      axios(OMDbAPI + "&s=" + movie.s+"&page="+movie.searchPage).then(({ data }) => {
         let results = data.Search;
         console.log(data);
         setSearch(prevState => {
@@ -54,15 +50,15 @@ function App() {
     setSearch(pre => { return { ...pre, wishList: a } })
   }
 
-  const getAllMovies = () => {
-    axios(OMDbAPI + "&s=Batman&page=" + movie.page).then(({ data }) => {
+  const getAllMovies = async () => {
+    await axios(OMDbAPI + "&s=batman&page=" + movie.page).then(({ data }) => {
       console.log(data.Search);
       setSearch(prevState => {
         return { ...prevState, allMovie: data.Search }
       })
     });
   }
-  // getAllMovies()
+
   const openPopup = id => {
     axios(OMDbAPI + "&i=" + id).then(({ data }) => {
       setSearch(prevState => {
@@ -108,8 +104,10 @@ function App() {
         <Header  wishList={movie.wishList}/>
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
+        <div className="button-container" >
+        {movie.page<="1"? (true):<button onClick={()=>decPage}>Pre Page</button>} 
         <button onClick={incPage}>Next Page</button>
-        {movie.page<1? (true):<button onClick={()=>decPage}>Pre Page</button>} 
+      </div>
         {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addToWish={addToWish} closePopUp={closePopup} /> : false}
       </div>
     </Router>

@@ -13,6 +13,11 @@ function Popup({ closePopUp, selected,addToWish }) {
     }
     return (  
         <section className="popup">
+            <div className="button-container" >
+            <button className="close" onClick={closePopUp}>close</button>
+            {wL? <button className="close" onClick={()=>{addToWish(selected);setWl(false)}}>Add To Wish List</button>:
+            <button className="close" onClick={()=>{removeFromWish();}}>Remove From Wish List</button>}
+            </div>
             <div className="content">
                 <img src={selected.Poster} ></img>
                 <h2>{selected.Title} <span>{selected.Year}</span></h2>
@@ -23,9 +28,6 @@ function Popup({ closePopUp, selected,addToWish }) {
                 <p className="rating">Plot:{selected.Plot}</p>
                 <p className="rating">Runtime:{selected.Runtime}</p>
             </div>
-            <button className="close" onClick={closePopUp}>close</button>
-            {wL? <button className="close" onClick={()=>{addToWish(selected);setWl(false)}}>Add To Wish List</button>:
-            <button className="close" onClick={()=>{removeFromWish();}}>Remove From Wish List</button>}
         </section>
     );
 }
