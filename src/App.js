@@ -68,8 +68,10 @@ function App() {
       return { ...prevState, selected: {} }
     })
   }
+
   const set = () => movie.wishList.length == 0 ? true : movie.wishList.forEach(element => {
     let m = localStorage.getItem('myData');
+    if(m==null)localStorage.setItem('myData',"");
     if (m.search(element.Title) == -1) {
       var s;
       m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID) : s = m.concat("," + element.Title + "," + element.Poster + "," + element.imdbID)
