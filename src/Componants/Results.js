@@ -5,9 +5,9 @@ function Results({ results, openPopup }) {
 
     return (
         <section className="results">
-            {results.map(result => (
+            {typeof (results) != "undefined" ? results.map(result => (
                 <Result key={result.imdbID} result={result} openPopup={openPopup} />
-            ))}
+            )) : "X No movies found please check the title of the movie X"}
         </section>
     );
 }

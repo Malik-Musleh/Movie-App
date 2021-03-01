@@ -1,11 +1,8 @@
+import Result from './Result';
 
 function WishList({ results, openPopup }) {
-    let wish = localStorage.getItem('myData');
-    wish=wish.replaceAll(/\s+/g,"")
-    console.log(wish[0]);
-    if (wish[0]==",") wish=wish.replace(",","")
-    console.log(wish);
-    // wish[0]===","?wish.replace(",",""):false
+    const wish = localStorage.getItem('myData');
+    console.log(wish.split(","));
     const object = wish.split(",").map((e, i, a) => {
         if (i % 3 === 0) {
             return { Title: a[i], Poster: a[i + 1], imdbID: a[i + 2] }
@@ -14,10 +11,9 @@ function WishList({ results, openPopup }) {
         }
     });
 
-    const rem = object.filter((e, i, a) => typeof (e.Poster) !== "undefined" && e !== a[i + 1])
-    console.log("rem[0].Title",rem[0].Title);
-    if (rem[0].Title == "") rem.length=0
-console.log("rem",rem);
+    const rem = object.filter((e, i, a) => typeof (e.Title) !== "undefined" && e !== a[i + 1])
+    let bool = rem[0].Title == ""
+    if (bool) rem.length = 0
 
     const m = rem.map((result, i) => (<div key={i} className="result" onClick={() => openPopup(result.imdbID)}>
         <img src={result.Poster} ></img>

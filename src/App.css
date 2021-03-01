@@ -70,6 +70,8 @@ section {
 		min-width: 300p;
 		display: flex;	
 		flex-wrap: wrap;
+
+  
 }
 
 .results .result img {
