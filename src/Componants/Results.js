@@ -1,13 +1,13 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Result from './Result';
 
-function Results({ results ,openPopup}) {
- 
+function Results({ results, openPopup }) {
+
     return (
         <section className="results">
-            {typeof(results)!="undefined" ?results.map(result => (
+            {typeof (results) != "undefined" ? results.map(result => (
                 <Result key={result.imdbID} result={result} openPopup={openPopup} />
-            )):"X No movies found please check the title of the movie X"}
+            )) : "X No movies found please check the title of the movie X"}
         </section>
     );
 }

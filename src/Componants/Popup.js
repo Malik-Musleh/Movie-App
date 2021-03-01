@@ -1,22 +1,22 @@
-import React ,{useState}from 'react';
+import React, { useState } from 'react';
 
-function Popup({ closePopUp, selected,addToWish }) {
-    const [wL,setWl]=useState(true)
+function Popup({ closePopUp, selected, addToWish }) {
+    const [wL, setWl] = useState(true)
 
-    var remVal=selected.Title+","+selected.Poster+","+selected.imdbID
-    let lS=localStorage.getItem("myData")
-    let accesse =lS.toString().search(remVal)>-1
-    const removeFromWish =()=>{
-         let v=lS.replace(remVal,"").replace(/s+/g,"")
-        localStorage.setItem("myData",v)
+    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID
+    let lS = localStorage.getItem("myData")
+    let accesse = lS.toString().search(remVal) > -1
+    const removeFromWish = () => {
+        let v = lS.replace(remVal, "").replace(/s+/g, "")
+        localStorage.setItem("myData", v)
         setWl(true)
     }
-    return (  
+    return (
         <section className="popup">
             <div className="button-container" >
-            <button className="close" onClick={closePopUp}>close</button>
-            {wL? <button className="close" onClick={()=>{addToWish(selected);setWl(false)}}>Add To Wish List</button>:
-            <button className="close" onClick={()=>{removeFromWish();}}>Remove From Wish List</button>}
+                <button className="close" onClick={closePopUp}>close</button>
+                {wL ? <button className="close" onClick={() => { addToWish(selected); setWl(false) }}>Add To Wish List</button> :
+                    <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button>}
             </div>
             <div className="content">
                 <img src={selected.Poster} ></img>

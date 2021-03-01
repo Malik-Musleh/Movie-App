@@ -1,17 +1,17 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Result({ result, openPopup }) {
-    const OMDbAPI = "http://www.omdbapi.com/?apikey=df39af2c"
-    const [state,setState]=useState("") 
-    // http://www.omdbapi.com/?apikey=df39af2c&i=tt2975590
+    const OMDbAPI = "https://www.omdbapi.com/?apikey=df39af2c"
+    const [state, setState] = useState("")
+
     const overveiw = () => {
         axios(OMDbAPI + "&i=" + result.imdbID).then(({ data }) => {
             return setState(data)
         });
-      }
-      useEffect(()=>overveiw(),[]) 
+    }
 
+    useEffect(() => overveiw(), [])
     return (
         <div className="result" onClick={() => openPopup(result.imdbID)}>
             <img src={result.Poster} ></img>
