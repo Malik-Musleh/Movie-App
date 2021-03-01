@@ -5,7 +5,7 @@ function Popup({ closePopUp, selected, addToWish }) {
 
     var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID
     let lS = localStorage.getItem("myData")
-    let accesse = lS.toString().search(remVal) > -1
+    // let accesse = lS.toString().search(remVal) > -1
     const removeFromWish = () => {
         let v = lS.replace(remVal, "").replace(/s+/g, "")
         localStorage.setItem("myData", v)

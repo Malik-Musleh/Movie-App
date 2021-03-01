@@ -95,15 +95,15 @@ function App() {
           </main>
           {movie.results.length > 1 ? <Results results={movie.results} openPopup={openPopup} /> :
             <Home results={movie.allMovie} openPopup={openPopup} />}
-        </Route>
-        <Route exact path="https://my-movie-website.herokuapp.com/wish-list">
-          <Header wishList={movie.wishList} />
-          <Wishlist results={movie.wishList} openPopup={openPopup} />
-        </Route>
         <div className="button-container" >
           {movie.page <= "1" ? (true) : <button onClick={() => decPage}>Pre Page</button>}
           <button onClick={incPage}>Next Page</button>
         </div>
+        </Route>
+        <Route exact path="/wish-list">
+          <Header wishList={movie.wishList} />
+          <Wishlist results={movie.wishList} openPopup={openPopup} />
+        </Route>
         {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addToWish={addToWish} closePopUp={closePopup} /> : false}
       </div>
     </Router>
