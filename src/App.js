@@ -36,6 +36,7 @@ function App() {
     if (e.key === "Enter") {
       axios(OMDbAPI + "&s=" + movie.s+"&page="+movie.searchPage).then(({ data }) => {
         let results = data.Search;
+        if(typeof(results)=="undefined")results=[];
         console.log(data);
         setSearch(prevState => {
           return { ...prevState, results: results }

@@ -267,11 +267,7 @@ section {
 	  border-radius: 3px;
 	  font-size: medium;
   } 
-  /* button :hover{
-	box-shadow: 0px  black;
-	background-color: blanchedalmond;
-	transform: scale(1.2);
-  }  */
+
   button:hover,
 button:focus {
     background: #0053ba;
