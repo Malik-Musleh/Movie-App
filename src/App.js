@@ -96,7 +96,7 @@ function App() {
           {movie.results.length > 1 ? <Results results={movie.results} openPopup={openPopup} /> :
             <Home results={movie.allMovie} openPopup={openPopup} />}
         </Route>
-        <Route exact path="/wish-list">
+        <Route exact path="https://my-movie-website.herokuapp.com/wish-list">
           <Header wishList={movie.wishList} />
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
