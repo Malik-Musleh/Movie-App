@@ -97,7 +97,7 @@ function App() {
     if (m == null) localStorage.setItem('myData', "");
     if (m.toString().search(element.Title) == -1) {
       var s;
-      m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID) : s = m.concat("," + element.Title + "," + element.Poster + "," + element.imdbID)
+      m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID+ ",") : s = m.concat( element.Title + "," + element.Poster + "," + element.imdbID)
       localStorage.setItem('myData', s);
     }
   });

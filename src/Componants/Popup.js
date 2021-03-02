@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 function Popup({ closePopUp, selected, addToWish }) {
     const [wL, setWl] = useState(true)
 
-    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID
+    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID+","
     let lS = localStorage.getItem("myData")//.replace(/\s+/g, "")
     const removeFromWish = () => {
         console.log(lS.search(selected.Title));
