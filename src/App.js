@@ -60,6 +60,9 @@ function App() {
       const a = movie.wishList
       a.push(e)
       setSearch(pre => { return { ...pre, wishList: a } })
+      let wlTot= Number(localStorage.getItem('wishtot'))
+      wlTot++
+      localStorage.setItem('wishtot',wlTot);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -91,10 +94,10 @@ function App() {
       return { ...prevState, selected: {} }
     })
   }
+  if ( localStorage.getItem('myData') == null) localStorage.setItem('myData', "");
 
   const set = () => movie.wishList.length == 0 ? true : movie.wishList.forEach(element => {
     let m = localStorage.getItem('myData');
-    if (m == null) localStorage.setItem('myData', "");
     if (m.toString().search(element.Title) == -1) {
       var s;
       m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID+ ",") : s = m.concat( element.Title + "," + element.Poster + "," + element.imdbID+",")
@@ -108,7 +111,7 @@ function App() {
   const incPageS = () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.searchPage++)).toString() } }); }
   useEffect(() => getAllMovies(), [])
 
-  useEffect(() => set)
+  useEffect(() => set())
   return (
     <Router>
       <div className="App">

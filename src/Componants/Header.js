@@ -8,7 +8,7 @@ const Header = () => {
                 <a href="https://my-movie-website.herokuapp.com/" class="logo">Movie App |</a>
             </div>
             <a href="https://my-movie-website.herokuapp.com/" >Home</a>
-            <a href="https://my-movie-website.herokuapp.com/wish-list">Wish List {m}</a>
+            <a href="https://my-movie-website.herokuapp.com/wish-list">Wish List <span className="total-wish">{m}</span> </a>
         </div>
     );
 };

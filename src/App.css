@@ -261,3 +261,19 @@ position: sticky;
 top: 50px;
 right: 50px;
 }
+
+@keyframes example {
+	0%   {background-color:red; left:0px; top:0px;}
+	50%  {background-color:rgb(255, 255, 255); left:200px; top:0px;}
+	75%  {background-color:red; left:200px; top:0px;}
+  }
+  .total-wish {
+	width: 12px;
+	height: 12px;
+	background-color: red;
+	animation-name: example;
+	animation-duration: 4s;
+	animation-iteration-count:infinite;
+	border-radius: 50% ;
+	font-size: x-small;
+} 
