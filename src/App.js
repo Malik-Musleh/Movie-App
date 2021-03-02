@@ -34,12 +34,15 @@ function App() {
     if (e.key === "Enter") {
       axios(OMDbAPI + "&s=" + movie.s + "&page=" + movie.searchPage).then(({ data }) => {
         let results = data.Search;
-        if (typeof (results) == "undefined") results = []; Swal.fire({
+        if (typeof (results) == "undefined"){ 
+          results = [];
+           Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'X No movies with this name found, please check movie title. X!',
           footer: '<a href>Why do I have this issue?</a>'
         });
+      }
         setSearch(prevState => {
           return { ...prevState, results: results }
         })
