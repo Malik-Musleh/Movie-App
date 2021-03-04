@@ -133,7 +133,7 @@ function App() {
             <button onClick={incPage}>Next Page</button>
           </div> : false}         
         </Route>
-        <Route exact path="/wish-list">
+        <Route exact path="/wish-list">  
           <Header wishList={movie.wishList} />
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
