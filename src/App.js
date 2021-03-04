@@ -126,8 +126,8 @@ function App() {
       localStorage.setItem('myData', s);
     }
   });
-  const decPage = () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page--)).toString() } }); getAllMovies() }
-  const incPage = () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page++)).toString() } }); getAllMovies() }
+  const decPage = async() => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page--)).toString() } }); await getAllMovies() }
+  const incPage =async () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page++)).toString() } });await getAllMovies() }
 
   const decPageS =async () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage--)).toString() } });await searchPageMovie() }
   const incPageS =async () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage++)).toString() } });await searchPageMovie() }
