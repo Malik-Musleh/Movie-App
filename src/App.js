@@ -127,11 +127,11 @@ function App() {
       localStorage.setItem('myData', s);
     }
   });
-  const decPage = async () => { setSearch(prevState => { return { ...prevState, pages: { home: movie.pages.home--, searchPage: 1 } } }); await getAllMovies() }
-  const incPage = async () => { setSearch(prevState => { return { ...prevState, pages: { home: movie.pages.home++, searchPage: 1 } } }); await getAllMovies() }
+  const decPage = async () => { let home = movie.pages.home - 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
+  const incPage = async () => { let home = movie.pages.home + 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
 
-  const decPageS = async () => { setSearch(prevState => { return { ...prevState, pages: { searchPage: movie.pages.searchPage--, home: 1 } } }); await searchPageMovie() }
-  const incPageS = async () => { setSearch(prevState => { return { ...prevState, pages: { searchPage: movie.pages.searchPage++, home: 1 } } }); await searchPageMovie() }
+  const decPageS = async () => { let searchPage = movie.pages.searchPage - 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
+  const incPageS = async () => { let searchPage = movie.pages.searchPage + 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
   useEffect(() => { getAllMovies(); set() })
   return (
     <Router>
