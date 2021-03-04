@@ -30,16 +30,17 @@ function App() {
     setSearch(pre => { return { ...pre, s: e.target.value } });
   }
 
-  const searchMovie = (e) => {
+  const searchMovie = async(e) => {
     if (e.key === "Enter") {
-      axios(OMDbAPI + "&s=" + movie.s + "&page=" + movie.searchPage).then(({ data }) => {
+       setSearch(pre =>{return{...pre,searchPage:"1"}})
+     await axios(OMDbAPI + "&s=" + movie.s + "&page=" + "1").then(({ data }) => {
         let results = data.Search;
         if (typeof (results) == "undefined") {
           results = [];
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'X No movies with this name found, please check movie title. X!',
+            text: ' No movies with such title found, please checkout the movie title.!',
             footer: '<a href>Why do I have this issue?</a>'
           });
         }
@@ -49,6 +50,24 @@ function App() {
       });
     }
   }
+  const searchPageMovie = async() => {
+    await axios(OMDbAPI + "&s=" + movie.s + "&page=" + movie.searchPage).then(({ data }) => {
+      let results = data.Search;
+      if (typeof (results) == "undefined") {
+        results = [];
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'X No movies with this name found, please check movie title. X!',
+          footer: '<a href>Why do I have this issue?</a>'
+        });
+      }
+      setSearch(prevState => {
+        return { ...prevState, results: results }
+      })
+    });
+  }   
+
 
   const addToWish = (e) => {
     let lS = localStorage.getItem('myData');
@@ -110,10 +129,9 @@ function App() {
   const decPage = () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page--)).toString() } }); getAllMovies() }
   const incPage = () => { setSearch(prevState => { return { ...prevState, page: (Number(movie.page++)).toString() } }); getAllMovies() }
 
-  const decPageS = () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage--)).toString() } }); }
-  const incPageS = () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage++)).toString() } }); }
-  useEffect(() => { getAllMovies() })
-  useEffect(() => set())
+  const decPageS =async () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage--)).toString() } });await searchPageMovie() }
+  const incPageS =async () => { setSearch(prevState => { return { ...prevState, searchPage: (Number(movie.searchPage++)).toString() } });await searchPageMovie() }
+  useEffect(() => { getAllMovies();set()})
   return (
     <Router>
       <div className="App">
@@ -131,7 +149,10 @@ function App() {
           {movie.results.length == 0 ? <div className="button-container" >
             {movie.page <= "1" ? (true) : <button onClick={decPage}>Pre Page</button>}
             <button onClick={incPage}>Next Page</button>
-          </div> : false}         
+          </div> : <div className="button-container" >
+            {movie.searchPage <= "1" ? (true) : <button onClick={decPageS}>Pre Page</button>}
+            <button onClick={incPageS}>Next Page</button>
+          </div>}         
         </Route>
         <Route exact path="/wish-list">  
           <Header wishList={movie.wishList} />
