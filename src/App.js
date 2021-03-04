@@ -131,7 +131,7 @@ function App() {
           {movie.results.length == 0 ? <div className="button-container" >
             {movie.page <= "1" ? (true) : <button onClick={decPage}>Pre Page</button>}
             <button onClick={incPage}>Next Page</button>
-          </div> : false}        
+          </div> : false}         
         </Route>
         <Route exact path="/wish-list">
           <Header wishList={movie.wishList} />
