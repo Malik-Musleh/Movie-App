@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 function Popup({ closePopUp, selected, addToWish }) {
     const [wL, setWl] = useState(true)
 
-    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID+","
+    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID + ","
     let lS = localStorage.getItem("myData")//.replace(/\s+/g, "")
+    const BTN = () => {
+        if (lS.search(selected.imdbID) !== -1) {
+            setWl(true)
+        } else {
+            setWl(false)
+        }
+    }
     const removeFromWish = () => {
         console.log(lS.search(selected.Title));
         if (lS.search(selected.Title) == -1) {
@@ -28,7 +35,7 @@ function Popup({ closePopUp, selected, addToWish }) {
                 if (result.isConfirmed) {
                     let v = lS.replace(remVal, "")
                     localStorage.setItem("myData", v)
-                    setWl(true)
+                    setWl(false)
                     Swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',
@@ -38,14 +45,15 @@ function Popup({ closePopUp, selected, addToWish }) {
             })
         }
     }
+    useEffect(() => BTN())
+
     return (
         <section className="popup">
             <div className="button-container" >
                 <button className="close" onClick={closePopUp}>close</button>
-                <button className="close" onClick={() => { addToWish(selected); setWl(false) }}>Add To Wish List</button>
-                <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button>
-                {/* {wL ? <button className="close" onClick={() => { addToWish(selected); setWl(false) }}>Add To Wish List</button> :
-                    <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button>} */}
+
+                {wL ? <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button> :
+                    <button className="close" onClick={() => { setWl(true) ;addToWish(selected);}}>Add To Wish List</button>}
             </div>
             <div className="content">
                 <img src={selected.Poster} ></img>
