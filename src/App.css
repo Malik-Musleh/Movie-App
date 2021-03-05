@@ -232,6 +232,7 @@ section {
   .button-container span{
 	  position: relative;
 	  /* display: flex; */
+	  bottom: 20px;
 	  left: 20px;
 	text-align: center;
 	color: whitesmoke;
