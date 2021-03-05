@@ -248,7 +248,7 @@ section {
 	  border-radius: 3px;
 	  font-size: medium;
 	  font-weight:bold;
-	  padding: 1px 24px;
+	  /* padding: 1px 24px; */
 	  font-family: 'montserrat', sans-serif;
 
   } 
