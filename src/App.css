@@ -285,3 +285,18 @@ right: 50px;
 	border-radius: 50% ;
 	font-size: x-small;
 } 
+
+@media screen and (max-width: 500px) {
+	.button-container .close {
+		display: grid;
+		position: static;
+		grid-template-columns: 1fr 1fr;
+		width: 170px;
+		height: 100%;
+		text-align: center;
+		margin: 5px;
+		margin-left: 23px;
+	}
+	a{text-decoration: none;}
+
+  }
