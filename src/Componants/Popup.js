@@ -4,8 +4,12 @@ import Swal from 'sweetalert2';
 function Popup({ closePopUp, selected, addToWish }) {
     const [wL, setWl] = useState(true)
 
-    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID + ","
-    let lS = localStorage.getItem("myData")//.replace(/\s+/g, "")
+    var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID + ",";
+
+    let urlTitle = selected.Title.replaceAll(/\s+/g, "-").replaceAll(/[_)(*&^%$#@!",:;?\\]|[0-9]+j/g,"")+"-"+selected.Year;
+    let watchItUrl = `https://eg.egybest.com/explore/?q=${urlTitle}`;
+
+    let lS = localStorage.getItem("myData")
     const BTN = () => {
         if (lS.search(selected.imdbID) !== -1) {
             setWl(true)
@@ -53,7 +57,8 @@ function Popup({ closePopUp, selected, addToWish }) {
                 <button className="close" onClick={closePopUp}>close</button>
 
                 {wL ? <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button> :
-                    <button className="close" onClick={() => { setWl(true) ;addToWish(selected);}}>Add To Wish List</button>}
+                    <button className="close" onClick={() => { setWl(true); addToWish(selected); }}>Add To Wish List</button>}
+                <a href={watchItUrl} ><button className="close" > EgyBest</button></a>
             </div>
             <div className="content">
                 <img src={selected.Poster} ></img>

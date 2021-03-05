@@ -229,6 +229,13 @@ section {
   .button-container{
 	  text-align: center;
   }
+  .button-container span{
+	  position: relative;
+	  /* display: flex; */
+	  left: 20px;
+	text-align: center;
+	color: whitesmoke;
+}
    button{
 	  background-color: #cedeec;
 	  width: 80px;
@@ -240,20 +247,20 @@ section {
 	  box-shadow: 3px 2px 3px 2px  black;
 	  border-radius: 3px;
 	  font-size: medium;
+	  font-weight:bold;
+	  padding: 1px 24px;
+	  font-family: 'montserrat', sans-serif;
+
   } 
 
   button:hover,
 button:focus {
-    background: #0053ba;
-}
-
-button:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px;
+    background: #eff1f3;
 }
 
 button:active {
-    transform: scale(0.99);
+    transform: scale(1.1);
+	background-color: #ddd;
 }
 
 .close{
