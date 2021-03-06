@@ -39,8 +39,8 @@ function App() {
         if (typeof (results) == "undefined") {
           results = [];
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
+            icon: 'info',
+            title: 'Not found...',
             text: ' No movies with such title found, please checkout the movie title.!',
             footer: '<a href>Why do I have this issue?</a>',
             showClass: {

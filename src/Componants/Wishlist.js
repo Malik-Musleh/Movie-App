@@ -22,7 +22,7 @@ function WishList({ results, openPopup }) {
 
     return (
 
-        <section className="results animate__animated animate__backInLeft">
+        <section className="results ">
             {m}
         </section>
     );
