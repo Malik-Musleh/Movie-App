@@ -172,13 +172,13 @@ function App() {
             <Home results={movie.allMovie} openPopup={openPopup} />}
 
           {movie.results.length == 0 ? <div className="button-container" >
-            {movie.pages.home <= "1" ? (true) : <button onClick={decPage}>Pre Page</button>}
+            {movie.pages.home <= "1" ? (true) : <button className="close" onClick={decPage}>Pre Page</button>}
             <span>| {movie.pages.home} |</span> 
-            <button onClick={incPage}>Next Page</button>
+            <button className="close"  onClick={incPage}>Next Page</button>
           </div> : <div className="button-container" >
-              {movie.pages.searchPage <= "1" ? (true) : <button onClick={decPageS}>Pre Page</button>}
+              {movie.pages.searchPage <= "1" ? (true) : <button className="close"  onClick={decPageS}>Pre Page</button>}
               <span>| {movie.pages.searchPage} |</span>
-              <button onClick={incPageS}>Next Page</button>
+              <button className="close"  onClick={incPageS}>Next Page</button>
             </div>}
         </Route>
         <Route exact path="/wish-list">

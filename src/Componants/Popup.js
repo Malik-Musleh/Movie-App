@@ -60,11 +60,11 @@ function Popup({ closePopUp, selected, addToWish }) {
     return (
         <section className="popup animate__animated animate__fadeInUp">
             <div className="button-container" >
-                <button className="close" onClick={closePopUp}>close</button>
+                <button className="close closeA" onClick={closePopUp}>close</button>
 
-                {wL ? <button className="close" onClick={() => { removeFromWish(); }}>Remove From Wish List</button> :
-                    <button className="close" onClick={() => { setWl(true); addToWish(selected); }}>Add To Wish List</button>}
-                <a href={watchItUrl} ><button className="close" > EgyBest</button></a>
+                {wL ? <button className="close closeA" onClick={() => { removeFromWish(); }}>Remove From Wish List</button> :
+                    <button className="close closeA" onClick={() => { setWl(true); addToWish(selected); }}>Add To Wish List</button>}
+                <a href={watchItUrl} ><button className="close closeA" > EgyBest</button></a>
             </div>
             <div className="content">
                 <img src={selected.Poster} ></img>
