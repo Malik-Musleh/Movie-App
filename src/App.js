@@ -42,7 +42,13 @@ function App() {
             icon: 'error',
             title: 'Oops...',
             text: ' No movies with such title found, please checkout the movie title.!',
-            footer: '<a href>Why do I have this issue?</a>'
+            footer: '<a href>Why do I have this issue?</a>',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
           });
         }
         setSearch(prevState => {
@@ -57,10 +63,16 @@ function App() {
       if (typeof (results) == "undefined") {
         results = [];
         Swal.fire({
-          icon: 'error',
+          icon: 'info',
           title: 'Oops...',
           text: 'No movies with this name found, please check movie title.!',
-          footer: '<a href>Why do I have this issue?</a>'
+          footer: '<a href>Why do I have this issue?</a>',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
         });
       }
       setSearch(prevState => {
@@ -77,7 +89,13 @@ function App() {
         icon: 'warning',
         title: 'Oops...',
         text: 'Already exist !',
-        footer: '<a href>Why do I have this issue?</a>'
+        footer: '<a href>Why do I have this issue?</a>',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
       })
     } else {
       const a = movie.wishList
@@ -91,7 +109,13 @@ function App() {
         icon: 'success',
         title: 'Your movie has been saved in the wish list',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
       })
     }
   }

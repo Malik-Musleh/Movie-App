@@ -13,7 +13,7 @@ function Result({ result, openPopup }) {
 
     useEffect(() => overveiw(), [])
     return (
-        <div className="result" onClick={() => openPopup(result.imdbID)}>
+        <div className="result animate__animated animate__backInRight" onClick={() => openPopup(result.imdbID)}>
             <img src={result.Poster} ></img>
             <h3>{result.Title}</h3>
             <div className="movie-over">

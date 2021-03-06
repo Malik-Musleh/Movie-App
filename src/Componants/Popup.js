@@ -34,7 +34,13 @@ function Popup({ closePopUp, selected, addToWish }) {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Yes, delete it!',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     let v = lS.replace(remVal, "")
@@ -52,7 +58,7 @@ function Popup({ closePopUp, selected, addToWish }) {
     useEffect(() => BTN())
 
     return (
-        <section className="popup">
+        <section className="popup animate__animated animate__backInDown">
             <div className="button-container" >
                 <button className="close" onClick={closePopUp}>close</button>
 

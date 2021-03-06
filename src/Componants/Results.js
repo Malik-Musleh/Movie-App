@@ -4,7 +4,7 @@ import Result from './Result';
 function Results({ results, openPopup }) {
 
     return (
-        <section className="results">
+        <section className="results ">
             {results.map(result => (
                 <Result key={result.imdbID} result={result} openPopup={openPopup} />
             ))}
