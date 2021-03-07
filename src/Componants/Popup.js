@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-function Popup({ closePopUp, selected, addToWish }) {
+function Popup({ closePopUp, selected, addToWish ,addTofav}) {
     const [wL, setWl] = useState(true)
 
     var remVal = selected.Title + "," + selected.Poster + "," + selected.imdbID + ",";
@@ -60,7 +60,8 @@ function Popup({ closePopUp, selected, addToWish }) {
     return (
         <section className="popup animate__animated animate__fadeInUp">
             <div className="button-container" >
-                <button className="close closeA" onClick={closePopUp}>close</button>
+            <button className="close closeA" onClick={closePopUp}>close</button>
+            <button className="close closeA" onClick={()=>addTofav(selected)}>addTofav &#9733;</button>
 
                 {wL ? <button className="close closeA" onClick={() => { removeFromWish(); }}>Remove From Wish List</button> :
                     <button className="close closeA" onClick={() => { setWl(true); addToWish(selected); }}>Add To Wish List</button>}

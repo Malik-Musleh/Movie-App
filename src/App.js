@@ -25,7 +25,8 @@ function App() {
       home: 1,
       searchPage: 1,
     },
-    wishList: []
+    wishList: [],
+    favList: []
   });
 
   const handleInput = (e) => {
@@ -57,6 +58,7 @@ function App() {
       });
     }
   }
+
   const searchPageMovie = async () => {
     await axios(OMDbAPI + "&s=" + movie.s + "&page=" + movie.pages.searchPage).then(({ data }) => {
       let results = data.Search;
@@ -119,6 +121,43 @@ function App() {
       })
     }
   }
+  if (localStorage.getItem('favList') == null) localStorage.setItem('favList', "");
+
+  const addTofav = (e) => {
+    let lS = localStorage.getItem('favlist');
+    if (lS.search(e.Title) != -1) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Already exist !',
+        footer: '<a href>Why do I have this issue?</a>',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    } else {
+      const a = movie.favList
+      a.push(e)
+      setSearch(pre => { return { ...pre, favList: a } })
+      console.log(a);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your movie has been saved in the wish list',
+        showConfirmButton: false,
+        timer: 1500,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    }
+  }
 
   const getAllMovies = async () => {
     await axios(OMDbAPI + "&s=batman&page=" + movie.pages.home).then(({ data }) => {
@@ -151,12 +190,20 @@ function App() {
       localStorage.setItem('myData', s);
     }
   });
+  const setFav = () => movie.favList.length == 0 ? true : movie.favList.forEach(element => {
+    let m = localStorage.getItem('favList');
+    if (m.toString().search(element.Title) == -1) {
+      var s;
+      m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID + ",") : s = m.concat(element.Title + "," + element.Poster + "," + element.imdbID + ",")
+      localStorage.setItem('favList', s);
+    }
+  });
   const decPage = async () => { let home = movie.pages.home - 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
   const incPage = async () => { let home = movie.pages.home + 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
 
   const decPageS = async () => { let searchPage = movie.pages.searchPage - 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
   const incPageS = async () => { let searchPage = movie.pages.searchPage + 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
-  useEffect(() => { getAllMovies(); set() })
+  useEffect(() => { getAllMovies(); set() ;setFav()})
   return (
     <Router>
       <div className="App">
@@ -185,7 +232,7 @@ function App() {
           <Header wishList={movie.wishList} />
           <Wishlist results={movie.wishList} openPopup={openPopup} />
         </Route>
-        {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addToWish={addToWish} closePopUp={closePopup} /> : false}
+        {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addTofav={addTofav} addToWish={addToWish} closePopUp={closePopup} /> : false}
       </div>
     </Router>
   );
