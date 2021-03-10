@@ -41,7 +41,7 @@ function Popup({ closePopUp, selected, addToWish ,addTofav}) {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Delete it!',
+                confirmButtonText: 'Yes, Removed it!',
                 showClass: {
                   popup: 'animate__animated animate__fadeInDown'
                 },
@@ -55,7 +55,7 @@ function Popup({ closePopUp, selected, addToWish ,addTofav}) {
                     setWl(false)
                     Swal.fire(
                         'Deleted!',
-                        'Your file has been deleted.',
+                        'Your movie has been removed.',
                         'success'
                     )
                 }
@@ -81,7 +81,7 @@ function Popup({ closePopUp, selected, addToWish ,addTofav}) {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Delete it!',
+                confirmButtonText: 'Yes, Removed it!',
                 showClass: {
                   popup: 'animate__animated animate__fadeInDown'
                 },
@@ -95,15 +95,13 @@ function Popup({ closePopUp, selected, addToWish ,addTofav}) {
                     setWl(false)
                     Swal.fire(
                         'Deleted!',
-                        'Your file has been deleted.',
+                        'Your movie has been removed.',
                         'success'
                     )
                 }
             })
         }
     }
-    // let bool =myFav.toString().search(selected.Title)>-1
-    // const isFav =()=>{if(bool){setFav(true)}}
 
     useEffect(() => {BTN();})
 
