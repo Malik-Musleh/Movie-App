@@ -13,11 +13,7 @@ function FavoriteList({ openPopup }) {
     });
 
     const rem = object.filter((e, i, a) => typeof (e.Poster) !== "undefined" && e !== a[i + 1])
-    // const m = rem.map((result, i) => (<div key={i} className="result animate__animated animate__pulse" onClick={() => openPopup(result.imdbID)}>
-    //     <img src={result.Poster} ></img>
-    //     <h3>{result.Title}</h3>
-    // </div>
-    // ));
+    localStorage.setItem("favTot",rem.length)
     return (
 
         <section className="results ">
