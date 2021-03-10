@@ -7,8 +7,8 @@ function Result({ result, openPopup }) {
     const [fav, setFav] = useState(false)
 
     let myFav =localStorage.getItem("favList")
-    let bool =myFav.toString().search(result.Title)>-1
-    const isFav =()=>{if(bool){setFav(true)}}
+    let bool =myFav.toString().search(result.imdbID)>-1
+    const isFav =()=>{if(bool){setFav(true)}else(setFav(false))}
     const overveiw = () => {
         axios(OMDbAPI + "&i=" + result.imdbID).then(({ data }) => {
             return setState(data)

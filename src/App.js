@@ -12,6 +12,8 @@ import Results from './Componants/Results';
 import Home from './Componants/Home';
 import Wishlist from './Componants/Wishlist';
 import Popup from './Componants/Popup';
+import FavoriteList from './Componants/FavoriteList';
+
 import './App.css';
 
 function App() {
@@ -124,7 +126,7 @@ function App() {
   if (localStorage.getItem('favList') == null) localStorage.setItem('favList', "");
 
   const addTofav = (e) => {
-    let lS = localStorage.getItem('favlist');
+    let lS = localStorage.getItem('favList');
     if (lS.search(e.Title) != -1) {
       Swal.fire({
         icon: 'warning',
@@ -139,10 +141,14 @@ function App() {
         }
       })
     } else {
-      const a = movie.favList
-      a.push(e)
-      setSearch(pre => { return { ...pre, favList: a } })
-      console.log(a);
+      // const a = movie.favList
+      // a.push(e)
+      // setSearch(pre => { return { ...pre, favList: a } })
+      let lS = localStorage.getItem('favList');
+      var s;
+      lS.length < 1 ? s = lS.toString()+(" " + e.Title + "," + e.Poster + "," + e.imdbID + ",") : s = lS.toString() +(e.Title + "," + e.Poster + "," + e.imdbID + ",")
+      console.log(s);
+      localStorage.setItem('favList', s);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -198,13 +204,13 @@ function App() {
       localStorage.setItem('favList', s);
     }
   });
-  
+
   const decPage = async () => { let home = movie.pages.home - 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
   const incPage = async () => { let home = movie.pages.home + 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
 
   const decPageS = async () => { let searchPage = movie.pages.searchPage - 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
   const incPageS = async () => { let searchPage = movie.pages.searchPage + 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
-  useEffect(() => { getAllMovies(); set() ;setFav()})
+  useEffect(() => { getAllMovies(); set();})
   return (
     <Router>
       <div className="App">
@@ -221,17 +227,21 @@ function App() {
 
           {movie.results.length == 0 ? <div className="button-container" >
             {movie.pages.home <= "1" ? (true) : <button className="close" onClick={decPage}>Pre Page</button>}
-            <span>| {movie.pages.home} |</span> 
-            <button className="close"  onClick={incPage}>Next Page</button>
+            <span>| {movie.pages.home} |</span>
+            <button className="close" onClick={incPage}>Next Page</button>
           </div> : <div className="button-container" >
-              {movie.pages.searchPage <= "1" ? (true) : <button className="close"  onClick={decPageS}>Pre Page</button>}
+              {movie.pages.searchPage <= "1" ? (true) : <button className="close" onClick={decPageS}>Pre Page</button>}
               <span>| {movie.pages.searchPage} |</span>
-              <button className="close"  onClick={incPageS}>Next Page</button>
+              <button className="close" onClick={incPageS}>Next Page</button>
             </div>}
         </Route>
         <Route exact path="/wish-list">
           <Header wishList={movie.wishList} />
           <Wishlist results={movie.wishList} openPopup={openPopup} />
+        </Route>
+        <Route exact path="/favorite-list">
+          <Header wishList={movie.wishList} />
+          <FavoriteList results={movie.wishList} openPopup={openPopup} />
         </Route>
         {typeof movie.selected.Title != "undefined" ? <Popup selected={movie.selected} addTofav={addTofav} addToWish={addToWish} closePopUp={closePopup} /> : false}
       </div>

@@ -9,6 +9,7 @@ const Header = () => {
             </div>
             <a href="https://my-movie-website.herokuapp.com/" >Home</a>
             <a href="https://my-movie-website.herokuapp.com/wish-list">Wish List <span className="total-wish">{m}</span> </a>
+            <a href="https://my-movie-website.herokuapp.com/favorite-list">Favorite List <span className="total-wish">{m}</span> </a>
         </div>
     );
 };
