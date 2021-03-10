@@ -15,7 +15,7 @@ import Popup from './Componants/Popup';
 import './App.css';
 
 function App() {
-  const OMDbAPI = "https://www.omdbapi.com/?apikey=df39af2c"
+  const OMDbAPI = "https://www.omdbapi.com/?apikey=3bd48de7"
   const [movie, setSearch] = useState({
     s: "",
     results: [],
@@ -146,7 +146,7 @@ function App() {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Your movie has been saved in the wish list',
+        title: 'Add to favorite',
         showConfirmButton: false,
         timer: 1500,
         showClass: {
@@ -198,6 +198,7 @@ function App() {
       localStorage.setItem('favList', s);
     }
   });
+  
   const decPage = async () => { let home = movie.pages.home - 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
   const incPage = async () => { let home = movie.pages.home + 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
 
