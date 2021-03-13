@@ -19,7 +19,6 @@ function WishList({ results, openPopup }) {
     ));
 
     localStorage.setItem('wishtot', rem.length);
-
     return (
 
         <section className="results ">

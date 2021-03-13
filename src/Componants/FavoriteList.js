@@ -13,11 +13,10 @@ function FavoriteList({ openPopup }) {
     });
 
     const rem = object.filter((e, i, a) => typeof (e.Poster) !== "undefined" && e !== a[i + 1])
-    localStorage.setItem("favTot",rem.length)
+    localStorage.setItem("favTot", rem.length)
     return (
 
         <section className="results ">
-            {/* {m} */}
             {rem.map(result => (
                 <Result key={result.imdbID} result={result} openPopup={openPopup} />
             ))}

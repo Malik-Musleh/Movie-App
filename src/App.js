@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
+  Route, Redirect
 } from "react-router-dom";
 import Swal from 'sweetalert2'
 import axios from 'axios';
@@ -16,7 +16,7 @@ import FavoriteList from './Componants/FavoriteList';
 
 import './App.css';
 
-function App() {
+function App(props) {
   const OMDbAPI = "https://www.omdbapi.com/?apikey=3bd48de7"
   const [movie, setSearch] = useState({
     s: "",
@@ -88,7 +88,7 @@ function App() {
 
   const addToWish = (e) => {
     let lS = localStorage.getItem('myData');
-    if (lS.search(e.Title) != -1) {
+    if (lS.search(e.imdbID) != -1) {
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
@@ -122,12 +122,15 @@ function App() {
         }
       })
     }
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 2000);
   }
   if (localStorage.getItem('favList') == null) localStorage.setItem('favList', "");
 
   const addTofav = (e) => {
     let lS = localStorage.getItem('favList');
-    if (lS.search(e.Title) != -1) {
+    if (lS.search(e.imdbID) != -1) {
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
@@ -141,14 +144,13 @@ function App() {
         }
       })
     } else {
-      // const a = movie.favList
-      // a.push(e)
-      // setSearch(pre => { return { ...pre, favList: a } })
       let lS = localStorage.getItem('favList');
       var s;
-      lS.length < 1 ? s = lS.toString()+(" " + e.Title + "," + e.Poster + "," + e.imdbID + ",") : s = lS.toString() +(e.Title + "," + e.Poster + "," + e.imdbID + ",")
-      console.log(s);
+      lS.length < 1 ? s = lS.toString() + (" " + e.Title + "," + e.Poster + "," + e.imdbID + ",") : s = lS.toString() + (e.Title + "," + e.Poster + "," + e.imdbID + ",")
       localStorage.setItem('favList', s);
+      let tot = localStorage.getItem('favTot');
+      tot++
+      localStorage.setItem('favTot', tot);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -163,6 +165,9 @@ function App() {
         }
       })
     }
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 2000);
   }
 
   const getAllMovies = async () => {
@@ -187,7 +192,6 @@ function App() {
     })
   }
   if (localStorage.getItem('myData') == null) localStorage.setItem('myData', "");
-
   const set = () => movie.wishList.length == 0 ? true : movie.wishList.forEach(element => {
     let m = localStorage.getItem('myData');
     if (m.toString().search(element.Title) == -1) {
@@ -196,21 +200,13 @@ function App() {
       localStorage.setItem('myData', s);
     }
   });
-  const setFav = () => movie.favList.length == 0 ? true : movie.favList.forEach(element => {
-    let m = localStorage.getItem('favList');
-    if (m.toString().search(element.Title) == -1) {
-      var s;
-      m.length < 1 ? s = m.concat(" " + element.Title + "," + element.Poster + "," + element.imdbID + ",") : s = m.concat(element.Title + "," + element.Poster + "," + element.imdbID + ",")
-      localStorage.setItem('favList', s);
-    }
-  });
 
   const decPage = async () => { let home = movie.pages.home - 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
   const incPage = async () => { let home = movie.pages.home + 1; setSearch(prevState => { return { ...prevState, pages: { home: home, searchPage: 1 } } }); await getAllMovies() }
 
   const decPageS = async () => { let searchPage = movie.pages.searchPage - 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
   const incPageS = async () => { let searchPage = movie.pages.searchPage + 1; setSearch(prevState => { return { ...prevState, pages: { searchPage: searchPage, home: 1 } } }); await searchPageMovie() }
-  useEffect(() => { getAllMovies(); set();})
+  useEffect(() => { getAllMovies(); set(); })
   return (
     <Router>
       <div className="App">
@@ -230,10 +226,10 @@ function App() {
             <span>| {movie.pages.home} |</span>
             <button className="close" onClick={incPage}>Next Page</button>
           </div> : <div className="button-container" >
-              {movie.pages.searchPage <= "1" ? (true) : <button className="close" onClick={decPageS}>Pre Page</button>}
-              <span>| {movie.pages.searchPage} |</span>
-              <button className="close" onClick={incPageS}>Next Page</button>
-            </div>}
+            {movie.pages.searchPage <= "1" ? (true) : <button className="close" onClick={decPageS}>Pre Page</button>}
+            <span>| {movie.pages.searchPage} |</span>
+            <button className="close" onClick={incPageS}>Next Page</button>
+          </div>}
         </Route>
         <Route exact path="/wish-list">
           <Header wishList={movie.wishList} />
