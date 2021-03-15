@@ -83,26 +83,26 @@ section {
 		height: 410px;
 }
 
-.results a .result img {
+.results  .result img {
 	display: block;
 	width: 100%;
 }
 
-.results a .result h3 {
+.results  .result h3 {
 	color: #FFF;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 600;
 	padding: 10px;
 	background: #445565;
 	flex: 1 1 100%;
 	transition: 0.4s ease-out;
-	text-decoration: none;
-
 }
 
-.results a  .result:hover h3 {
+.results .result:hover h3 {
 	background: #FFF;
 	color: #223343;
+	width: 100%;
+
 }
 
 .popup {

@@ -2,7 +2,6 @@ import Result from './Result';
 
 function FavoriteList({ openPopup }) {
     let wish = localStorage.getItem('favList');
-    wish = wish.replaceAll(/\s+/g, "")
     if (wish[0] === ",") wish = wish.replace(",", "")
     const object = wish.split(",").map((e, i, a) => {
         if (i % 3 === 0) {
