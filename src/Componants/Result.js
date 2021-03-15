@@ -6,29 +6,30 @@ function Result({ result, openPopup }) {
     const [state, setState] = useState("")
     const [fav, setFav] = useState(false)
 
-    let myFav =localStorage.getItem("favList")
-    let bool =myFav.toString().search(result.imdbID)>-1
-    const isFav =()=>{if(bool){setFav(true)}else(setFav(false))}
+    let myFav = localStorage.getItem("favList")
+    let bool = myFav.toString().search(result.imdbID) > -1
+    const isFav = () => { if (bool) { setFav(true) } else (setFav(false)) }
     const overveiw = () => {
         axios(OMDbAPI + "&i=" + result.imdbID).then(({ data }) => {
             return setState(data)
         });
     }
 
-    useEffect(() => {overveiw();isFav()}, [])
+    useEffect(() => { overveiw(); isFav() }, [])
     return (
-        <div className="result" onClick={() => openPopup(result.imdbID)}>
-            
-            <img src={result.Poster} ></img>
-            <h3>{result.Title} 
-            {fav?<span> <span class="fa fa-star checked"></span></span> :
-            <span> <span class="fa fa-star"></span></span>}           
-            </h3>
-            <div className="movie-over">
-                <h3>overview : </h3>
-                <p>{state.Plot}</p>
+        <a href="#header" onClick={() => openPopup(result.imdbID)} >
+            <div className="result">
+                <img src={result.Poster} ></img>
+                <h3>{result.Title}
+                    {fav ? <span> <span class="fa fa-star checked"></span></span> :
+                        <span> <span class="fa fa-star"></span></span>}
+                </h3>
+                <div className="movie-over">
+                    <h3>overview : </h3>
+                    <p>{state.Plot}</p>
+                </div>
             </div>
-        </div>
+        </a>
     );
 }
 

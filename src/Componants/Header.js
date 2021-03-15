@@ -5,7 +5,7 @@ const Header = () => {
     const f = localStorage.getItem("favTot")
 
     return (
-        <div className="header" >
+        <div className="header" id="header">
             <div>
                 <a href="https://my-movie-website.herokuapp.com/" class="logo">Movie App &nbsp;
                 <i class="fa fa-film" style={{ "font-size": "24px" }}></i> </a>

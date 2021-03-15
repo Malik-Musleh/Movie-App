@@ -211,7 +211,7 @@ function App(props) {
     <Router>
       <div className="App">
         <Route exact path="/">
-          <Header wishList={movie.wishList} />
+          <Header wishList={movie.wishList}  />
           <header className="App-header">
             <h1>Movie App</h1>
           </header>
